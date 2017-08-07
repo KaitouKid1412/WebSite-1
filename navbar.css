@@ -1,0 +1,14 @@
+
+*{
+	margin:0;
+	padding:0;
+}
+.navbar.navbar-default{
+	margin-top:5px;
+	background-color: white;
+
+}
+
+.navbar-brand{
+	font-weight: bolder;
+}

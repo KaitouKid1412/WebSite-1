@@ -1,0 +1,31 @@
+*{
+	margin:0;
+	padding:0;
+}
+.navbar.navbar-default{
+	margin-top:50px;
+	margin-bottom:50px;
+	background-color:white;
+
+}
+a:hover{
+	font-weight:bolder;
+	color:white;
+}
+.navbar-brand{
+	font-weight: bolder;
+}
+#container .row .col-md-offset-2 .col-md-8 ul li{
+	display:inline-block;
+}
+.list{
+	display:inline-block;
+	float:left;
+}
+li{
+	padding:5px;
+	margin:5px;
+}
+p{
+	text-align:center;
+}

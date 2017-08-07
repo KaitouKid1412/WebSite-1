@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="ContactUs.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="ContactUs.js"></script>		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+	</head>
+
+	<body>
+	<div class="container">
+		<div class="row">	
+			<div class="col-md-offset-4 col-md-4">	
+				<h1>
+					Contact Us
+				</h1><br><br>
+					<form class="form" action="ContactUs.php" method="POST">
+						<em>Name</em>:<input type="text" name="name" placeholder="Enter Your Name"><br><br>
+						<em>Email:</em><input type="text" name="email" placeholder="Enter Your Email"><br><br>
+						<em>Text Area</em>:<br>
+						<textarea id="message" name="message" placeholder="Type Your Message Here" rows="6" cols="40"></textarea>
+						<br><br>
+						<input type="submit" name="submit"><br>
+					</form>
+			</div>		
+		</div>
+	</div>	
+	</body>
+</html>
