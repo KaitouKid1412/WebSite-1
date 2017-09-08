@@ -36,8 +36,23 @@ include 'core.inc.php';
 			      		</ul>
 			      		<ul class="nav navbar-nav navbar-right">
 			      			<li><a href="Sell.php"> Sell Items </a></li>
-			        		<li><a href="Registrationform.inc.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			        		<li><a href="logincheck.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			        		<?php
+
+								if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))
+								{
+									?>
+									<li><a href="adminpage.php"><span class="glyphicon glyphicon-user"></span><?php echo getfield('user_name'); ?></a></li>
+			        				 <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			        				 <?php
+							    }
+							    else
+							    {
+							    	?>	
+					        		<li><a href="Registrationform.inc.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					        		<li><a href="loginform.inc.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					        	<?php
+					        	}
+					        	?>
 			        	</ul>
 			    	</div>
 			  	</div>
@@ -66,26 +81,32 @@ include 'core.inc.php';
 		 	<div class="row">
 		 		<div class="col-md-push-1 col-md-8">
 		 			<ul >
-		           		<li class="list">
-		           			<img height="300" width="200" src= "Uploads/The Da Vinci Code.jpg.JPG">
-		           			<p><?php get_data('25'); ?></p>
-		           		</li >
-		           		<li class="list">
-		           			<img height="300" width="200" src= "Uploads/Angels and Demons.jpg.JPG">
-		           			<p><?php get_data('26'); ?></p>
-		           		</li>
-		           		<li class="list">
-		           			<img height="300" width="200" src= "Uploads/The Lost Symbol.jpg.JPG">
-		           			<p><?php get_data('27'); ?></p>
-		           		</li>
-		           		<li class="list">
-		           			<img height="300" width="200" src="Uploads/The Lord of the Rings.jpg.JPG">
-		           			<p><?php get_data('27'); ?></p>            				
-		           		</li>
-		           		<li class="list">
-		           			<img height="300" width="200" src="Uploads/Harry Potter and the Cursed Child.jpg.JPG">
-		           			<p><?php get_data('29'); ?></p>            				
-		           		</li>
+		           		<?php
+
+		 				$query = "SELECT * FROM sale_items WHERE `category`='book' ";
+						if($query_run = mysql_query($query)) 
+				 			{	
+				 				while($row = mysql_fetch_array($query_run))
+				 				{
+				 					$num = $row['id'];
+				 					$img_name = "Uploads/".$row['image_name'].".JPG"; 
+				 	?>	
+			            		<li class="list">
+			            			<img height="250" width="200" src= "<?php echo $img_name; ?>">
+			            			<p><?php get_data($num); ?><br>
+			           				<form method="GET" action="adminpage.php" enctype="multipart/form-data">
+			            				<input name="wishlist_num" type="hidden" value="<?php echo $num; ?>">
+			            				<input name="wishlist_name" type="hidden" value="<?php echo $img_name; ?>">
+			           					<button id="wishlist" type="submit">Add to Wishlist</button>
+			           				</form>	
+			           				</p>
+		            			</li >
+		            <?php
+								}		            
+		        			}
+		            	else
+		            		die(mysql_error());	
+		            ?>
 		           	</ul>	
 				</div>
 		  	</div>

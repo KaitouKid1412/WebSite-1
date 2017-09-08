@@ -3,8 +3,7 @@
 	padding:0;
 }
 .navbar.navbar-default{
-	margin-top:50px;
-	margin-bottom:50px;
+
 	background-color:white;
 
 }
@@ -22,10 +21,30 @@ a:hover{
 	display:inline-block;
 	float:left;
 }
-li{
-	padding:5px;
-	margin:5px;
-}
 p{
 	text-align:center;
+}
+button{
+	padding:5px;
+}
+#wrapper{
+	padding-left:30px;
+	padding-right:35px;
+	padding-top:20px;
+	border:solid gray 1px;
+}
+#container
+{
+	margin-top:100px;
+}
+h3
+{
+	color:gray;
+	padding-bottom :50px;
+	margin-bottom:50px;
+}
+#wishlist
+{
+	margin-left:35px;
+	padding:10px;
 }

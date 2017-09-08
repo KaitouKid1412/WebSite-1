@@ -1,4 +1,4 @@
-*{
+s*{
 	margin:0;
 	padding:0;
 }
@@ -6,11 +6,24 @@
 .list{
 	display:inline-block;
 	float:left;
-}
-li{
-	padding:5px;
-	margin:5px;
+	padding:15px;
+	margin:20px;
 }
 p{
 	text-align:center;
+}
+#wrapper{
+	padding-left:30px;
+	padding-right:35px;
+	padding-top:20px;
+	border:solid gray 1px;
+}
+#container
+{
+	margin-top:100px;
+}
+#wishlist
+{
+	margin-left:35px;
+	padding:10px;
 }

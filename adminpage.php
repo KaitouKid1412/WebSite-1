@@ -2,8 +2,22 @@
 
 include 'core.inc.php';
 
-?>
 
+if(isset($_GET['wishlist_num']) && isset($_GET['wishlist_name']))
+{
+	$number = $_GET['wishlist_num'];
+	$image_name = $_GET['wishlist_name'];
+
+	if(!empty($number) && !empty($image_name))
+	{
+		$query = "INSERT INTO `wishlist` VALUES ('".mysql_real_escape_string($number)."',
+												 '".mysql_real_escape_string($_SESSION['user_id'])."',
+												 '".mysql_real_escape_string($image_name)."')";
+		if($query_run = mysql_query($query))
+			header('Location: index.php');
+	}
+}
+?>
 
 <html>
 	<head>
@@ -12,8 +26,7 @@ include 'core.inc.php';
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="navbar.css">
 		<link rel="stylesheet" type="text/css" href="sidebar.css">
-		<link rel="stylesheet" type="text/css" href="styleindex.css">
-		<script src="javascript.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
 	<body>
@@ -36,7 +49,7 @@ include 'core.inc.php';
 			      		</ul>
 			      		<ul class="nav navbar-nav navbar-right">
 			      			<li><a href="Sell.php"> Sell Items </a></li>
-			        		<?php
+			      			<?php
 
 								if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))
 								{
@@ -59,58 +72,39 @@ include 'core.inc.php';
 			  </div>
 		</nav>
 
-		<!-- side bar-->
-
-		<div id="wrapper" class="container-fluid">
-		 	<div class="row">
-		 		<div class="col-md-2">
-            		<div id="sidebar-wrapper">
-    	        		<ul class="sidebar-nav">
-	    	        		<li id="GAP"><a href="index.php"><font color="gray">Mobiles</font></a></li>
-	      				    <li><a href="Laptops.php"><font color="gray">Laptops</font></a></li>
-				            <li><a href="Books.php"><font color="gray">Books</font></a></li>
-				            <li><a href="ContactUs.php"><font color="gray">ContactUs</font></a></li>
-				        </ul>
-        			</div>
-				</div>
-        	</div>
-        </div>
-
-
 		<div id="container">
 		 	<div class="row">
 		 		<div class="col-md-push-1 col-md-8">
+		 			<h3>Your Wishlist</h3>
 		 			<ul >
-	            		<?php
+					<?php
 
-		 				$query = "SELECT * FROM sale_items WHERE `category`='laptop' ";
-						if($query_run = mysql_query($query)) 
-				 			{	
-				 				while($row = mysql_fetch_array($query_run))
-				 				{
-				 					$num = $row['id'];
-				 					$img_name = "Uploads/".$row['image_name'].".JPG"; 
-				 	?>	
-			            		<li class="list">
-			            			<img height="250" width="200" src= "<?php echo $img_name; ?>">
-			            			<p><?php get_data($num); ?><br>
-			           				<form method="GET" action="adminpage.php" enctype="multipart/form-data">
-			            				<input name="wishlist_num" type="hidden" value="<?php echo $num; ?>">
-			            				<input name="wishlist_name" type="hidden" value="<?php echo $img_name; ?>">
-			           					<button id="wishlist" type="submit">Add to Wishlist</button>
-			           				</form>	
-			           				</p>
-		            			</li >
-		            <?php
-								}		            
-		        			}
-		            	else
-		            		die(mysql_error());	
-		            ?>
-	            	</ul>	
+					$query = "SELECT * FROM wishlist WHERE user_name='".$_SESSION['user_id']."' ";
+					if($query_run = mysql_query($query)) 
+					{	
+						while($row = mysql_fetch_array($query_run))
+						{
+							$num = $row['id'];
+							$img_name = $row['image_name']; 
+					?>	
+						
+						<li class="list">
+							<img height="250" width="200" src= "<?php echo $img_name; ?>">
+							<p><?php get_data($num); ?><br></p>
+							
+						</li >
+
+					<?php
+							}		            
+						}
+					   	else
+					 		die(mysql_error());	
+					?>
+					</ul>	
 				</div>
         	</div>
         </div>
 	</body>
 </html>
 
+	
